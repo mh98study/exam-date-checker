@@ -2,20 +2,18 @@ import requests
 import pandas as pd
 import os
 
-link = "https://lfuonline.uibk.ac.at/public/lfuonline_lv.anmeldetermine?c=search&m=3&d=1&dft=&dfm=&dfj=&dtt=&dtm=&dtj=&r=205853&s=1"
-keywords = ["VO Lineare Algebra",
-            "VO Funktionale Programmierung",
-            "VO Maschinelles Lernen",
-            "VO Rechnerarchitektur",
-            "VO Betriebssysteme",
-            "VO Parallele Programmierung",
-            "VO Software Engineering",
-            "VO Diskrete Strukturen",
-            "VO Angewandte Mathematik",
-            "VO Rechnernetze und Internettechnik",
-            "VO Verteilte Systeme",
-            "VO Visual Computing",
-            "VO Logik"]
+LINK_LINE = 1
+LECTURE_LINE = 3
+
+config_file = open("config.txt", "r")
+keywords = []
+lines = config_file.readlines()
+link = lines[LINK_LINE][0:-1]
+
+for line in lines[LECTURE_LINE:]:
+    if len(line) > 1:
+        lecture_to_append = line[0:-1]
+        keywords.append(lecture_to_append)
 
 html = requests.get(link).content
 df_list = pd.read_html(html)
@@ -24,11 +22,9 @@ for i, df in enumerate(df_list):
 
 df = pd.read_csv("raw_data.csv", delimiter=',')
 os.remove("raw_data.csv")
-df.columns = ["","lv","registration_date","exam_date"]
-print(df)
+df.columns = ["", "lv", "registration_date", "exam_date"]
 
 new_df = df.loc[df['lv'].str.contains("|".join(keywords))]
-new_df = new_df[["lv","exam_date"]]
+new_df = new_df[["lv", "exam_date"]]
 print(new_df)
 new_df.to_csv("relevant_exams.csv".format(new_df))
-
