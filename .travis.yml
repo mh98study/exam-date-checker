@@ -1,6 +1,6 @@
 language: python
 install:
-  - pip install -r cli/requirements.txt
+  - pip install -r requirements.txt
 # command to run tests
 script:
-  - python cli/exam-checker.py
+  - python exam-checker.py
