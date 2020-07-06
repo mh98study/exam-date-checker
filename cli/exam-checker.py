@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import os
-
+print(os.path.dirname(os.path.abspath(__file__)))
 LINK_LINE = 1
 LECTURE_LINE = 3
 
