@@ -1,4 +1,4 @@
-# Exam Date Checker
+# Exam Checker
 
 Exam Date Checker is a Python Script which reads available exams from a given link to LFU:Online and prints relevant exams defined by their lecture name to the console and stores them in a .csv file.
 
@@ -13,7 +13,7 @@ pip install requirements.txt
 ## Usage
 
 ```bash
-python exam-date-checker.py
+python exam-checker.py
 ```
 
 ## Contributing
