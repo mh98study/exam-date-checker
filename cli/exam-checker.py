@@ -1,11 +1,11 @@
 import requests
 import pandas as pd
 import os
-print(os.path.dirname(os.path.abspath(__file__)))
+PATH = (os.path.dirname(os.path.abspath(__file__)))
 LINK_LINE = 1
 LECTURE_LINE = 3
 
-config_file = open("config.txt", "r")
+config_file = open(PATH + "/config.txt", "r")
 keywords = []
 lines = config_file.readlines()
 link = lines[LINK_LINE][0:-1]
